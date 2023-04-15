@@ -38,19 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+    'drf_yasg',
+
     'app',
     'rest_framework',
+    'djoser',
+    'rest_framework.authtoken',
 ]
 
-REST_FRAMEWORK  =  { 
-    'DEFAULT_PERMISSION_CLASSES' :  [ 
-        'rest_framework.permissions.AllowAny' , 
-    ] 
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,7 +79,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'todo.wsgi.application'
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
